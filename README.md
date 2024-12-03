@@ -1,14 +1,13 @@
 [![Build and Push Docker Image](https://github.com/bwbioinfo/<tool>-docker-cwl/actions/workflows/build-and-push.yml/badge.svg)](https://github.com/bwbioinfo/<tool>-docker-cwl/actions/workflows/build-and-push.yml)
 
-# <tool>-docker-cwl
+# tidyggplot2-docker
 
-This repository provides a [Common Workflow Language (CWL)](https://www.commonwl.org/) tool for running the [<tool>](link) program. The tool is packaged in a Docker container, allowing it to run on any system with Docker or Singularity installed.
+This repository provides a container to run [R] packages [tidyverse] and [ggplot2] based on [r-base] image. The tool is packaged in a Docker container, allowing it to run on any system with Docker or Singularity installed.
 
 ## Prerequisites
 
 To use this tool, you must have the following software installed on your system:
 
-- [CWL tool](https://github.com/common-workflow-language/cwltool)
 - [Docker](https://www.docker.com/) OR [Singularity](https://sylabs.io/singularity/) OR [Apptainer](https://apptainer.org/)
 
 ## Installation
@@ -20,32 +19,22 @@ To install and run the tool, follow these steps:
 3. (optional) Build the Docker image by running the following command from the root of the repository:
 
     ```
-    docker build -f docker/Dockerfile -t <tool>-docker-cwl .
+    docker build -f docker/Dockerfile -t tidyggplot2 .
     ```
     OR pull from the built container.
     ```
-    docker pull ghcr.io/bwbioinfo/<tool>-docker-cwl:latest
+    docker pull ghcr.io/charlenelawdes/tidyggplot2-docker:latest
     ```
-   Note: this is only needed if you wish to access the container commands directly via docker.
-4. Run the CWL tool by running the following command from the root of the repository:
-
-    ```
-    cwl-runner <tool>-tool.cwl <tool>-inputs.yml
-    ```
-    OR
-    ```
-    cwl-runner --singularity <tool>-tool.cwl <tool>-inputs.yml
-    ```
-
-   This will run the <tool> software on the input sequence specified in the `<tool>-inputs.yml` file.
 
 ## Usage
 
-To use the tool, you will need to create a YAML file specifying the input sequence and any other parameters you wish to specify. An example YAML file is provided in the `example` directory of this repository.
+To run the docker container, you will need to use:
 
-The `<tool>-tool.cwl` file is the main workflow file that describes the steps of the <tool> analysis. The `<tool>-inputs.yml` file is an example input file that specifies the input and any other options you wish to specify. The `<tool>-tool.cwl` file includes the docker specification. You can also use [Singularity](https://sylabs.io/singularity/) via the cwl-runner option `--singularity` 
+```
+docker run -it tidyggplot2-docker
+```
 
-The output of the analysis will be written to a directory named `output` in the current working directory.
+To see how to mount directories within containers and other useful `docker run` options, see [Docker] documentation (https://docs.docker.com/reference/cli/docker/container/run).
 
 ## Contributing
 
@@ -64,3 +53,11 @@ This project is licensed under the [MIT License](https://github.com/bwbioinfo/to
 ## Contact
 
 If you have any questions or feedback, please contact the author via GitHub.
+
+[Docker]: https://www.docker.com
+[Singularity]: https://docs.sylabs.io/guides/3.5/user-guide/introduction.html
+[Apptainer]: https://apptainer.org
+[R]: https://www.r-project.org/
+[tidyverse]: https://www.tidyverse.org/
+[ggplot2]: https://ggplot2.tidyverse.org/
+[r-base]: https://hub.docker.com/_/r-base
